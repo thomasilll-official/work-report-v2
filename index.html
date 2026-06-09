@@ -27,7 +27,6 @@
       margin: 0 auto;
     }
 
-    /* Animations */
     @keyframes fadeSlideDown {
       0% { opacity: 0; transform: translateY(-20px); }
       100% { opacity: 1; transform: translateY(0); }
@@ -49,7 +48,6 @@
       animation: fadeSlideDown 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
     }
 
-    /* Logo styling */
     .logo-container {
       display: flex;
       align-items: center;
@@ -116,12 +114,6 @@
       transition: all 0.3s ease;
     }
 
-    .live-clock:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    /* grid */
     .grid-2col {
       display: grid;
       grid-template-columns: 1fr;
@@ -141,7 +133,6 @@
       }
     }
 
-    /* glass cards */
     .glass-card {
       background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(14px);
@@ -151,7 +142,6 @@
       padding: 16px;
       transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
       animation: fadeSlideUp 0.5s ease forwards;
-      animation-delay: calc(var(--order, 0) * 0.1s);
     }
 
     .glass-card:hover {
@@ -182,17 +172,12 @@
       transition: transform 0.3s ease;
     }
 
-    .card-header:hover .icon-bg {
-      transform: rotate(5deg) scale(1.05);
-    }
-
     .card-header h2 {
       font-size: 1.1rem;
       font-weight: 700;
       color: #0f172a;
     }
 
-    /* form - fixed select boxes */
     .form-group {
       margin-bottom: 12px;
     }
@@ -230,11 +215,6 @@
       font-size: 0.85rem;
       outline: none;
       transition: all 0.2s ease;
-      appearance: none;
-      -webkit-appearance: none;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%234f46e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
-      background-repeat: no-repeat;
-      background-position: right 12px center;
     }
 
     input:focus, select:focus {
@@ -246,10 +226,8 @@
     input:read-only {
       background: #f8fafd;
       font-weight: 600;
-      background-image: none;
     }
 
-    /* status toggle */
     .status-switch {
       display: flex;
       gap: 8px;
@@ -274,7 +252,6 @@
     .status-option.active {
       background: white;
       box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-      transform: scale(0.98);
     }
 
     .status-option.pending.active { color: #d97706; background: #fffbeb; }
@@ -301,10 +278,6 @@
       box-shadow: 0 8px 20px rgba(79,70,229,0.35);
     }
 
-    .btn-primary:active {
-      transform: translateY(0);
-    }
-
     .btn-outline {
       background: transparent;
       border: 1px solid #cbd5e1;
@@ -313,10 +286,8 @@
     .btn-outline:hover {
       background: rgba(79,70,229,0.05);
       border-color: #4f46e5;
-      transform: translateY(-1px);
     }
 
-    /* stats grid */
     .stats-boss {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -342,13 +313,6 @@
       padding: 8px 4px;
       text-align: center;
       transition: all 0.3s ease;
-      animation: scaleIn 0.4s ease;
-    }
-
-    .stat-boss-card:hover {
-      transform: translateY(-3px);
-      background: white;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
 
     .stat-label {
@@ -369,7 +333,6 @@
       color: #4f46e5;
     }
 
-    /* boss-wise breakdown - simple */
     .boss-list {
       list-style: none;
       margin-top: 10px;
@@ -387,7 +350,6 @@
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
-      animation: fadeSlideUp 0.4s ease;
     }
 
     .boss-list li:hover {
@@ -417,10 +379,8 @@
       border-radius: 30px;
       font-weight: 700;
       font-size: 0.75rem;
-      transition: all 0.2s ease;
     }
 
-    /* table */
     .table-wrapper {
       overflow-x: auto;
       border-radius: 20px;
@@ -446,14 +406,8 @@
     td {
       padding: 10px 6px;
       border-bottom: 1px solid #e6edf8;
-      transition: background 0.2s ease;
     }
 
-    tr:hover td {
-      background: rgba(79, 70, 229, 0.04);
-    }
-
-    /* Status in one line - inline badge */
     .status-badge {
       display: inline-flex;
       align-items: center;
@@ -505,25 +459,13 @@
       font-size: 0.7rem;
       font-weight: 500;
     }
-
-    /* Scrollbar */
-    .boss-list::-webkit-scrollbar {
-      width: 4px;
-    }
-    .boss-list::-webkit-scrollbar-track {
-      background: #e2e8f0;
-      border-radius: 10px;
-    }
-    .boss-list::-webkit-scrollbar-thumb {
-      background: #4f46e5;
-      border-radius: 10px;
-    }
   </style>
 </head>
 <body>
 <div class="container">
   <div class="hero">
     <div class="logo-container">
+      <div class="logo-icon">📒</div>
     </div>
     <div class="chip">🎯 Boss-wise expense · Work tracking</div>
     <h1>Hisab <span style="background: linear-gradient(135deg,#4f46e5,#a855f7); background-clip:text; -webkit-background-clip:text; color:transparent;">Pro</span></h1>
@@ -532,8 +474,7 @@
   </div>
 
   <div class="grid-2col">
-    <!-- LEFT: Add/Edit Form -->
-    <div class="glass-card" style="--order:0">
+    <div class="glass-card">
       <div class="card-header"><span class="icon-bg">✍️</span><h2>Record expense</h2></div>
       <form id="expenseForm">
         <div id="editTag" class="edit-banner">✏️ Editing mode — click Update</div>
@@ -564,8 +505,7 @@
       </form>
     </div>
 
-    <!-- RIGHT: Monthly Report -->
-    <div class="glass-card" style="--order:1">
+    <div class="glass-card">
       <div class="card-header"><span class="icon-bg">📊</span><h2>Boss report</h2></div>
       <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;">
         <select id="filterMonth" style="flex:1; border-radius: 30px; padding: 8px;"></select>
@@ -592,8 +532,7 @@
     </div>
   </div>
 
-  <!-- All records table -->
-  <div class="glass-card" style="--order:2">
+  <div class="glass-card">
     <div class="card-header"><span class="icon-bg">📋</span><h2>All transactions</h2></div>
     <div class="backup-bar">
       <button id="downloadBackupBtn" class="btn btn-outline" style="font-size:0.7rem;">⬇️ Backup JSON</button>
@@ -602,9 +541,7 @@
     <input id="backupFileInput" type="file" accept=".json" hidden />
     <div class="table-wrapper">
       <table>
-        <thead>
-          <tr><th>DateTime</th><th>Boss</th><th>Work</th><th>Rate</th><th>Qty</th><th>Amount</th><th>Note</th><th>Status</th><th>Actions</th></tr>
-        </thead>
+        <thead><tr><th>DateTime</th><th>Boss</th><th>Work</th><th>Rate</th><th>Qty</th><th>Amount</th><th>Note</th><th>Status</th><th>Actions</th></tr></thead>
         <tbody id="recordsBody"></tbody>
       </table>
     </div>
@@ -612,12 +549,11 @@
 </div>
 
 <script>
-  const STORAGE_KEY = "hisab_final_v14";
+  const STORAGE_KEY = "hisab_final_v15";
   const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   let expenses = [];
   let editingId = null;
 
-  // DOM Elements
   const form = document.getElementById("expenseForm");
   const dateTimeInput = document.getElementById("dateTime");
   const bossSelect = document.getElementById("boss");
@@ -649,14 +585,14 @@
   const liveClockSpan = document.getElementById("liveClock");
 
   function formatMoney(val) { return "₹" + Number(val).toLocaleString("en-IN", { minimumFractionDigits: 2 }); }
-  function formatDateTime(dateStr) { let d=new Date(dateStr); if(isNaN(d)) return "-"; return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`; }
-  function getNowLocal() { let d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}T${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`; }
+  function formatDateTime(dateStr) { let d = new Date(dateStr); if (isNaN(d)) return "-"; return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`; }
+  function getNowLocal() { let d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}T${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`; }
   function escapeHtml(s) { return String(s).replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
 
   function updateAmount() {
     let r = parseFloat(rateInput.value);
     let q = parseFloat(quantityInput.value);
-    if(!isNaN(r) && !isNaN(q) && r>0 && q>0) amountInput.value = (r*q).toFixed(2);
+    if (!isNaN(r) && !isNaN(q) && r > 0 && q > 0) amountInput.value = (r * q).toFixed(2);
     else amountInput.value = "";
   }
   rateInput.addEventListener("input", updateAmount);
@@ -665,18 +601,20 @@
   const pendingBtn = document.querySelector(".status-option.pending");
   const doneBtn = document.querySelector(".status-option.done");
   function setStatusUI(status) {
-    if(status === "pending") { pendingBtn.classList.add("active"); doneBtn.classList.remove("active"); statusHidden.value = "pending"; }
+    if (status === "pending") { pendingBtn.classList.add("active"); doneBtn.classList.remove("active"); statusHidden.value = "pending"; }
     else { doneBtn.classList.add("active"); pendingBtn.classList.remove("active"); statusHidden.value = "done"; }
   }
-  pendingBtn.addEventListener("click", () => setStatusUI("pending"));
-  doneBtn.addEventListener("click", () => setStatusUI("done"));
+  if (pendingBtn && doneBtn) {
+    pendingBtn.addEventListener("click", () => setStatusUI("pending"));
+    doneBtn.addEventListener("click", () => setStatusUI("done"));
+  }
 
-  function loadExpenses() { try { let raw = localStorage.getItem(STORAGE_KEY); if(raw) { let arr=JSON.parse(raw); if(Array.isArray(arr)) return arr; } } catch(e){} return []; }
+  function loadExpenses() { try { let raw = localStorage.getItem(STORAGE_KEY); if (raw) { let arr = JSON.parse(raw); if (Array.isArray(arr)) return arr; } } catch(e){} return []; }
   function saveExpenses(data) { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); expenses = data; }
 
   function renderTable() {
-    if(!expenses.length) { recordsBody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding:24px;">✨ No records</td></tr>'; return; }
-    let sorted = [...expenses].sort((a,b)=>new Date(b.dateTime)-new Date(a.dateTime));
+    if (!expenses.length) { recordsBody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding:24px;">✨ No records</td></tr>'; return; }
+    let sorted = [...expenses].sort((a,b) => new Date(b.dateTime) - new Date(a.dateTime));
     recordsBody.innerHTML = sorted.map(item => `
       <tr>
         <td>${escapeHtml(formatDateTime(item.dateTime))}</td>
@@ -691,14 +629,14 @@
       </tr>
     `).join("");
     document.querySelectorAll(".icon-btn.edit").forEach(btn => btn.addEventListener("click", (e) => startEdit(btn.getAttribute("data-id"))));
-    document.querySelectorAll(".icon-btn.delete").forEach(btn => btn.addEventListener("click", (e) => { if(confirm("Delete permanently?")) deleteExpense(btn.getAttribute("data-id")); }));
+    document.querySelectorAll(".icon-btn.delete").forEach(btn => btn.addEventListener("click", (e) => { if (confirm("Delete permanently?")) deleteExpense(btn.getAttribute("data-id")); }));
   }
 
-  function deleteExpense(id) { expenses = expenses.filter(i=>i.id!==id); saveExpenses(expenses); if(editingId===id) resetForm(); renderAll(); }
+  function deleteExpense(id) { expenses = expenses.filter(i => i.id !== id); saveExpenses(expenses); if (editingId === id) resetForm(); renderAll(); }
 
   function startEdit(id) {
-    let item = expenses.find(i=>i.id===id);
-    if(!item) return;
+    let item = expenses.find(i => i.id === id);
+    if (!item) return;
     editingId = id;
     dateTimeInput.value = item.dateTime.slice(0,16);
     bossSelect.value = item.boss;
@@ -737,13 +675,13 @@
     let note = noteInput.value.trim();
     let status = statusHidden.value;
 
-    if(!dateTime || !boss || work==="" || isNaN(rate) || rate<=0 || isNaN(quantity) || quantity<=0 || isNaN(amount) || amount<=0) {
+    if (!dateTime || !boss || work === "" || isNaN(rate) || rate <= 0 || isNaN(quantity) || quantity <= 0 || isNaN(amount) || amount <= 0) {
       alert("Please fill: Boss, Work, valid Rate (>0), Quantity (>0).");
       return;
     }
-    if(editingId) {
-      let idx = expenses.findIndex(i=>i.id===editingId);
-      if(idx!==-1) { expenses[idx] = { ...expenses[idx], dateTime, boss, work, rate, quantity, amount, note, status }; }
+    if (editingId) {
+      let idx = expenses.findIndex(i => i.id === editingId);
+      if (idx !== -1) { expenses[idx] = { ...expenses[idx], dateTime, boss, work, rate, quantity, amount, note, status }; }
     } else {
       expenses.push({ id: crypto.randomUUID(), dateTime, boss, work, rate, quantity, amount, note, status });
     }
@@ -755,13 +693,13 @@
   function renderBossSummary() {
     let year = parseInt(filterYear.value);
     let month = parseInt(filterMonth.value);
-    let filtered = expenses.filter(e => { let d=new Date(e.dateTime); return d.getFullYear()===year && d.getMonth()===month; });
+    let filtered = expenses.filter(e => { let d = new Date(e.dateTime); return d.getFullYear() === year && d.getMonth() === month; });
     
     let totalEntries = filtered.length;
-    let pendingEntries = filtered.filter(e=>e.status==='pending').length;
-    let pendingAmt = filtered.filter(e=>e.status==='pending').reduce((s,e)=>s+e.amount,0);
-    let doneEntries = filtered.filter(e=>e.status==='done').length;
-    let doneAmt = filtered.filter(e=>e.status==='done').reduce((s,e)=>s+e.amount,0);
+    let pendingEntries = filtered.filter(e => e.status === 'pending').length;
+    let pendingAmt = filtered.filter(e => e.status === 'pending').reduce((s,e) => s + e.amount, 0);
+    let doneEntries = filtered.filter(e => e.status === 'done').length;
+    let doneAmt = filtered.filter(e => e.status === 'done').reduce((s,e) => s + e.amount, 0);
     let totalAmt = pendingAmt + doneAmt;
     
     totalEntriesSpan.innerText = totalEntries;
@@ -773,28 +711,28 @@
     
     let bossCount = new Map();
     filtered.forEach(e => { bossCount.set(e.boss, (bossCount.get(e.boss) || 0) + 1); });
-    let sortedBoss = Array.from(bossCount.entries()).sort((a,b)=>b[1] - a[1]);
-    if(sortedBoss.length === 0) {
+    let sortedBoss = Array.from(bossCount.entries()).sort((a,b) => b[1] - a[1]);
+    if (sortedBoss.length === 0) {
       bossSummaryUl.innerHTML = '<li style="justify-content:center;">📭 No data this month</li>';
     } else {
       bossSummaryUl.innerHTML = sortedBoss.map(([bossName, count]) => `<li><span class="boss-name">${escapeHtml(bossName)}</span><span class="boss-count">📋 ${count} entries</span></li>`).join("");
     }
-    let uniqueBoss = [...new Set(filtered.map(e=>e.boss))];
-    if(uniqueBoss.length === 0) uniqueBoss = ["Pappu Sonavane", "Akash Pol", "Mohan Pol", "Other"];
-    exportBossFilter.innerHTML = `<option value="ALL">All Bosses</option>` + uniqueBoss.map(b=>`<option value="${b}">${b}</option>`).join("");
+    let uniqueBoss = [...new Set(filtered.map(e => e.boss))];
+    if (uniqueBoss.length === 0) uniqueBoss = ["Pappu Sonavane", "Akash Pol", "Mohan Pol", "Other"];
+    exportBossFilter.innerHTML = `<option value="ALL">All Bosses</option>` + uniqueBoss.map(b => `<option value="${b}">${b}</option>`).join("");
   }
 
   function updateYearOptions() {
-    let yearsSet = new Set(expenses.map(e=>new Date(e.dateTime).getFullYear()));
+    let yearsSet = new Set(expenses.map(e => new Date(e.dateTime).getFullYear()));
     yearsSet.add(new Date().getFullYear());
-    let years = Array.from(yearsSet).sort((a,b)=>b-a);
+    let years = Array.from(yearsSet).sort((a,b) => b - a);
     let old = filterYear.value;
-    filterYear.innerHTML = years.map(y=>`<option value="${y}">${y}</option>`).join("");
-    if(years.includes(parseInt(old))) filterYear.value = old; else filterYear.value = new Date().getFullYear();
+    filterYear.innerHTML = years.map(y => `<option value="${y}">${y}</option>`).join("");
+    if (years.includes(parseInt(old))) filterYear.value = old; else filterYear.value = new Date().getFullYear();
   }
 
   function initFilters() {
-    filterMonth.innerHTML = MONTHS.map((m,i)=>`<option value="${i}">${m}</option>`).join("");
+    filterMonth.innerHTML = MONTHS.map((m,i) => `<option value="${i}">${m}</option>`).join("");
     let now = new Date();
     filterMonth.value = now.getMonth();
     updateYearOptions();
@@ -803,38 +741,106 @@
 
   function renderAll() { renderTable(); updateYearOptions(); renderBossSummary(); }
 
+  // FIXED: Mobile-friendly PDF export using Blob and opening in new tab
   function exportPDF() {
     let year = parseInt(filterYear.value), month = parseInt(filterMonth.value);
     let bossFilter = exportBossFilter.value;
-    let monthItems = expenses.filter(e=>{ let d=new Date(e.dateTime); return d.getFullYear()===year && d.getMonth()===month; });
-    let exportItems = bossFilter==="ALL" ? monthItems : monthItems.filter(e=>e.boss === bossFilter);
-    if(!exportItems.length) { alert("No data for selected boss/month."); return; }
+    let monthItems = expenses.filter(e => { let d = new Date(e.dateTime); return d.getFullYear() === year && d.getMonth() === month; });
+    let exportItems = bossFilter === "ALL" ? monthItems : monthItems.filter(e => e.boss === bossFilter);
+    if (!exportItems.length) { alert("No data for selected boss/month."); return; }
+    
     let monthName = MONTHS[month];
-    let total = exportItems.reduce((s,e)=>s+e.amount,0);
-    let pending = exportItems.filter(e=>e.status==='pending').length;
-    let pendingAmt = exportItems.filter(e=>e.status==='pending').reduce((s,e)=>s+e.amount,0);
-    let done = exportItems.filter(e=>e.status==='done').length;
-    let doneAmt = exportItems.filter(e=>e.status==='done').reduce((s,e)=>s+e.amount,0);
-    let rows = exportItems.map((e,i) => `<tr><td style="padding:6px;">${i+1}</td><td style="padding:6px;">${escapeHtml(formatDateTime(e.dateTime))}</td><td style="padding:6px;"><strong>${escapeHtml(e.boss)}</strong></td><td style="padding:6px;">${escapeHtml(e.work)}</td><td style="text-align:right; padding:6px;">${formatMoney(e.amount)}</td><td style="padding:6px;"><em>${escapeHtml(e.note && e.note.trim() !== '' ? e.note : '—')}</em></td><td style="padding:6px;">${e.status==='done'?'✓ DONE':'⏳ PENDING'}</td></tr>`).join("");
-    let win = window.open("", "_blank", "width=900,height=800");
-    if(!win) { alert("Allow popup for PDF"); return; }
-    win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Hisab Report ${monthName} ${year}</title><style>body{font-family:'Inter',sans-serif;padding:16px;background:#fff;color:#1e293b}h1{font-size:22px;color:#4f46e5;text-align:center}.summary{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:16px 0}.card{background:#f8fafc;padding:8px;border-radius:12px;text-align:center}.card-value{font-size:14px;font-weight:800}table{width:100%;border-collapse:collapse;font-size:10px}th{background:#f1f5f9;padding:8px;text-align:left}td{padding:6px;border-bottom:1px solid #e2e8f0}.footer{text-align:center;font-size:8px;margin-top:20px}</style></head><body><h1>📊 HISAB PRO - EXPENSE REPORT</h1><p style="text-align:center">${monthName} ${year} | Filter: ${bossFilter} | ${new Date().toLocaleString()}</p><div class="summary"><div class="card"><div class="card-value">📋 ${exportItems.length} Entries</div></div><div class="card"><div class="card-value">🏦 ${formatMoney(total)} Total</div></div><div class="card"><div class="card-value">⏳ ${pending} / ${formatMoney(pendingAmt)}</div></div><div class="card"><div class="card-value">✔️ ${done} / ${formatMoney(doneAmt)}</div></div></div><table><thead><tr><th>#</th><th>Date</th><th>Boss</th><th>Work</th><th>Amount</th><th>Note</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table><div class="footer"><p>Hisab Pro - Developed by Aditya.S</p></div><script>window.onload=function(){window.print();setTimeout(function(){window.close();},600);};<\/script></body></html>`);
-    win.document.close();
+    let total = exportItems.reduce((s,e) => s + e.amount, 0);
+    let pending = exportItems.filter(e => e.status === 'pending').length;
+    let pendingAmt = exportItems.filter(e => e.status === 'pending').reduce((s,e) => s + e.amount, 0);
+    let done = exportItems.filter(e => e.status === 'done').length;
+    let doneAmt = exportItems.filter(e => e.status === 'done').reduce((s,e) => s + e.amount, 0);
+    
+    let rows = exportItems.map((e,i) => `
+      <tr>
+        <td style="padding:8px; border-bottom:1px solid #e2e8f0;">${i+1}</td>
+        <td style="padding:8px; border-bottom:1px solid #e2e8f0;">${escapeHtml(formatDateTime(e.dateTime))}</td>
+        <td style="padding:8px; border-bottom:1px solid #e2e8f0;"><strong>${escapeHtml(e.boss)}</strong></td>
+        <td style="padding:8px; border-bottom:1px solid #e2e8f0;">${escapeHtml(e.work)}</td>
+        <td style="padding:8px; border-bottom:1px solid #e2e8f0; text-align:right;">${formatMoney(e.amount)}</td>
+        <td style="padding:8px; border-bottom:1px solid #e2e8f0;"><em>${escapeHtml(e.note && e.note.trim() !== '' ? e.note : '—')}</em></td>
+        <td style="padding:8px; border-bottom:1px solid #e2e8f0;">${e.status === 'done' ? '✓ DONE' : '⏳ PENDING'}</td>
+      </tr>
+    `).join("");
+    
+    const htmlContent = `<!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Hisab Report ${monthName} ${year}</title>
+      <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 20px; background: #fff; color: #1e293b; }
+        .header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #4f46e5; }
+        h1 { font-size: 24px; color: #4f46e5; margin-bottom: 6px; }
+        .sub { font-size: 12px; color: #64748b; }
+        .summary-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 20px 0; }
+        .card { background: #f8fafc; padding: 12px; border-radius: 16px; text-align: center; border: 1px solid #e2e8f0; }
+        .card-label { font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase; }
+        .card-value { font-size: 18px; font-weight: 800; margin-top: 5px; }
+        .section-title { font-size: 16px; font-weight: 700; margin: 20px 0 12px; padding-left: 10px; border-left: 3px solid #4f46e5; }
+        table { width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 20px; }
+        th { background: #f1f5f9; padding: 10px 8px; text-align: left; font-weight: 700; border-bottom: 1px solid #e2e8f0; }
+        td { padding: 8px; border-bottom: 1px solid #e2e8f0; }
+        .text-right { text-align: right; }
+        .footer { text-align: center; font-size: 9px; color: #94a3b8; margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e8f0; }
+        @media print {
+          body { padding: 12px; }
+          .no-print { display: none; }
+        }
+      </style>
+    </head>
+    <body>
+      <div class="header">
+        <h1>📊 HISAB PRO - EXPENSE REPORT</h1>
+        <div class="sub">${monthName} ${year} | Filter: ${escapeHtml(bossFilter)} | Generated: ${new Date().toLocaleString()}</div>
+      </div>
+      <div class="summary-cards">
+        <div class="card"><div class="card-label">📋 Total Entries</div><div class="card-value">${exportItems.length}</div></div>
+        <div class="card"><div class="card-label">🏦 Total Expense</div><div class="card-value">${formatMoney(total)}</div></div>
+        <div class="card"><div class="card-label">⏳ Pending</div><div class="card-value">${pending} / ${formatMoney(pendingAmt)}</div></div>
+        <div class="card"><div class="card-label">✔️ Done</div><div class="card-value">${done} / ${formatMoney(doneAmt)}</div></div>
+      </div>
+      <div class="section-title">👥 Boss-wise Summary</div>
+      <table><thead><tr><th>Boss</th><th class="text-right">Total Amount</th></tr></thead>
+      <tbody>${Array.from(exportItems.reduce((map, e) => map.set(e.boss, (map.get(e.boss) || 0) + e.amount), new Map()).entries()).map(([name, amt]) => `<tr><td><strong>${escapeHtml(name)}</strong></td><td class="text-right">${formatMoney(amt)}</td></tr>`).join('')}</tbody>
+      </table>
+      <div class="section-title">📋 Transaction Details</div>
+      <table><thead><tr><th>#</th><th>Date & Time</th><th>Boss</th><th>Work</th><th class="text-right">Amount</th><th>Note</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table>
+      <div class="footer"><p>Hisab Pro - Developed by Aditya.S | Official Expense Record</p></div>
+      <script>window.onload = function() { window.print(); setTimeout(function() { window.close(); }, 800); };<\/script>
+    </body>
+    </html>`;
+    
+    // Create blob and open in new tab (works on mobile)
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const newWindow = window.open(url, '_blank');
+    if (!newWindow) {
+      alert("Please allow popups to view PDF. Alternatively, use the backup feature.");
+    }
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 
-  function downloadBackup() { let backup={version:14,exportedAt:new Date().toISOString(),records:expenses}; let a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([JSON.stringify(backup,null,2)],{type:"application/json"})); a.download=`hisab-backup-${new Date().toISOString().slice(0,10)}.json`; a.click(); URL.revokeObjectURL(a.href); }
-  async function restoreFromFile(e) { let file=e.target.files[0]; if(!file) return; try{ let txt=await file.text(); let p=JSON.parse(txt); let rec=p.records||[]; if(Array.isArray(rec) && confirm(`Restore ${rec.length} records?`)){ expenses=rec.filter(r=>r.id&&r.boss&&typeof r.amount==='number'); saveExpenses(expenses); resetForm(); renderAll(); alert("Restored!"); } } catch(err){ alert("Invalid file"); } backupFile.value=""; }
+  function downloadBackup() { let backup = { version: 15, exportedAt: new Date().toISOString(), records: expenses }; let a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" })); a.download = `hisab-backup-${new Date().toISOString().slice(0,10)}.json`; a.click(); URL.revokeObjectURL(a.href); }
+  async function restoreFromFile(e) { let file = e.target.files[0]; if (!file) return; try { let txt = await file.text(); let p = JSON.parse(txt); let rec = p.records || []; if (Array.isArray(rec) && confirm(`Restore ${rec.length} records?`)) { expenses = rec.filter(r => r.id && r.boss && typeof r.amount === 'number'); saveExpenses(expenses); resetForm(); renderAll(); alert("Restored!"); } } catch(err) { alert("Invalid file"); } backupFile.value = ""; }
 
-  function startClock() { function tick(){ liveClockSpan.innerHTML = `⏱️ ${new Date().toLocaleString("en-IN",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"})}`; } tick(); setInterval(tick,1000); }
+  function startClock() { function tick() { liveClockSpan.innerHTML = `⏱️ ${new Date().toLocaleString("en-IN", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })}`; } tick(); setInterval(tick, 1000); }
 
   form.addEventListener("submit", addOrUpdate);
   cancelBtn.addEventListener("click", resetForm);
   filterMonth.addEventListener("change", renderBossSummary);
   filterYear.addEventListener("change", renderBossSummary);
-  resetMonthBtn.addEventListener("click", ()=>{ let n=new Date(); filterMonth.value=n.getMonth(); filterYear.value=n.getFullYear(); renderBossSummary(); });
+  resetMonthBtn.addEventListener("click", () => { let n = new Date(); filterMonth.value = n.getMonth(); filterYear.value = n.getFullYear(); renderBossSummary(); });
   exportPdfBtn.addEventListener("click", exportPDF);
   downloadBtn.addEventListener("click", downloadBackup);
-  restoreBtn.addEventListener("click", ()=>backupFile.click());
+  restoreBtn.addEventListener("click", () => backupFile.click());
   backupFile.addEventListener("change", restoreFromFile);
 
   function init() { expenses = loadExpenses(); initFilters(); startClock(); resetForm(); renderAll(); }
