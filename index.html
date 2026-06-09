@@ -78,10 +78,6 @@
       color: #4f46e5;
       transition: all 0.3s ease;
     }
-    .chip:hover {
-      transform: scale(1.05);
-      background: rgba(79, 70, 229, 0.2);
-    }
 
     h1 {
       font-size: 1.8rem;
@@ -111,7 +107,6 @@
       font-size: 0.7rem;
       font-weight: 500;
       border: 1px solid rgba(255,255,255,0.6);
-      transition: all 0.3s ease;
     }
 
     .grid-2col {
@@ -147,7 +142,6 @@
     .glass-card:hover {
       transform: translateY(-4px);
       background: rgba(255, 255, 255, 0.92);
-      box-shadow: 0 20px 35px -12px rgba(79, 70, 229, 0.2);
     }
 
     .card-header {
@@ -169,7 +163,6 @@
       justify-content: center;
       color: white;
       font-size: 1rem;
-      transition: transform 0.3s ease;
     }
 
     .card-header h2 {
@@ -214,13 +207,11 @@
       font-family: 'Inter', monospace;
       font-size: 0.85rem;
       outline: none;
-      transition: all 0.2s ease;
     }
 
     input:focus, select:focus {
       border-color: #4f46e5;
       box-shadow: 0 0 0 3px rgba(79,70,229,0.15);
-      transform: translateY(-1px);
     }
 
     input:read-only {
@@ -246,7 +237,6 @@
       cursor: pointer;
       background: transparent;
       border: none;
-      transition: all 0.2s ease;
     }
 
     .status-option.active {
@@ -273,19 +263,11 @@
       box-shadow: 0 4px 10px rgba(79,70,229,0.25);
     }
 
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(79,70,229,0.35);
-    }
+    .btn-primary:active { transform: scale(0.97); }
 
     .btn-outline {
       background: transparent;
       border: 1px solid #cbd5e1;
-    }
-
-    .btn-outline:hover {
-      background: rgba(79,70,229,0.05);
-      border-color: #4f46e5;
     }
 
     .stats-boss {
@@ -312,7 +294,6 @@
       border-radius: 16px;
       padding: 8px 4px;
       text-align: center;
-      transition: all 0.3s ease;
     }
 
     .stat-label {
@@ -345,17 +326,9 @@
       margin-bottom: 8px;
       padding: 12px 16px;
       border-radius: 24px;
-      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      cursor: pointer;
-    }
-
-    .boss-list li:hover {
-      transform: translateX(6px) scale(1.01);
-      background: white;
-      box-shadow: 0 6px 16px rgba(79,70,229,0.12);
     }
 
     .boss-name {
@@ -434,15 +407,10 @@
       cursor: pointer;
       padding: 4px 8px;
       border-radius: 20px;
-      transition: all 0.2s ease;
     }
 
     .icon-btn.edit { color: #3b82f6; background: #eff6ff; }
     .icon-btn.delete { color: #ef4444; background: #fef2f2; }
-
-    .icon-btn:hover {
-      transform: scale(1.1);
-    }
 
     .backup-bar {
       display: flex;
@@ -461,8 +429,7 @@
       font-weight: 500;
     }
 
-    /* Toast message for mobile */
-    .toast-message {
+    .toast-msg {
       position: fixed;
       bottom: 20px;
       left: 50%;
@@ -471,21 +438,18 @@
       color: white;
       padding: 10px 20px;
       border-radius: 30px;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       z-index: 1000;
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.3s;
       pointer-events: none;
-      white-space: nowrap;
     }
-    .toast-message.show {
-      opacity: 1;
-    }
+    .toast-msg.show { opacity: 1; }
   </style>
 </head>
 <body>
 <div class="container">
-  <div id="toast" class="toast-message"></div>
+  <div id="toastMsg" class="toast-msg"></div>
   <div class="hero">
     <div class="logo-container">
       <div class="logo-icon">📒</div>
@@ -550,7 +514,7 @@
       
       <div style="display:flex; gap:8px; margin-top: 12px;">
         <select id="exportBossFilter" style="border-radius:30px; flex:1; padding: 8px;"><option value="ALL">All Bosses</option></select>
-        <button id="exportMonthPdfBtn" class="btn btn-primary" style="background:#f59e0b; padding: 8px 14px;">📎 PDF</button>
+        <button id="exportMonthPdfBtn" class="btn btn-primary" style="background:#f59e0b; padding: 8px 14px;">📎 View Report</button>
       </div>
     </div>
   </div>
@@ -572,7 +536,7 @@
 </div>
 
 <script>
-  const STORAGE_KEY = "hisab_final_v16";
+  const STORAGE_KEY = "hisab_final_v17";
   const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   let expenses = [];
   let editingId = null;
@@ -606,12 +570,12 @@
   const restoreBtn = document.getElementById("restoreBackupBtn");
   const backupFile = document.getElementById("backupFileInput");
   const liveClockSpan = document.getElementById("liveClock");
-  const toastEl = document.getElementById("toast");
+  const toastMsg = document.getElementById("toastMsg");
 
-  function showToast(msg, duration = 3000) {
-    toastEl.textContent = msg;
-    toastEl.classList.add("show");
-    setTimeout(() => toastEl.classList.remove("show"), duration);
+  function showToast(msg) {
+    toastMsg.textContent = msg;
+    toastMsg.classList.add("show");
+    setTimeout(() => toastMsg.classList.remove("show"), 3000);
   }
 
   function formatMoney(val) { return "₹" + Number(val).toLocaleString("en-IN", { minimumFractionDigits: 2 }); }
@@ -771,8 +735,8 @@
 
   function renderAll() { renderTable(); updateYearOptions(); renderBossSummary(); }
 
-  // MOBILE-FRIENDLY PDF: Creates downloadable PDF file
-  function exportPDF() {
+  // MOBILE-FRIENDLY REPORT: Opens in new tab with print-friendly design
+  function openReport() {
     let year = parseInt(filterYear.value), month = parseInt(filterMonth.value);
     let bossFilter = exportBossFilter.value;
     let monthItems = expenses.filter(e => { let d = new Date(e.dateTime); return d.getFullYear() === year && d.getMonth() === month; });
@@ -788,49 +752,49 @@
     
     let rows = exportItems.map((e,i) => `
       <tr>
-        <td style="padding:8px; border-bottom:1px solid #e2e8f0;">${i+1}</td>
-        <td style="padding:8px; border-bottom:1px solid #e2e8f0;">${escapeHtml(formatDateTime(e.dateTime))}</td>
-        <td style="padding:8px; border-bottom:1px solid #e2e8f0;"><strong>${escapeHtml(e.boss)}</strong></td>
-        <td style="padding:8px; border-bottom:1px solid #e2e8f0;">${escapeHtml(e.work)}</td>
-        <td style="padding:8px; border-bottom:1px solid #e2e8f0; text-align:right;">${formatMoney(e.amount)}</td>
-        <td style="padding:8px; border-bottom:1px solid #e2e8f0;"><em>${escapeHtml(e.note && e.note.trim() !== '' ? e.note : '—')}</em></td>
-        <td style="padding:8px; border-bottom:1px solid #e2e8f0;">${e.status === 'done' ? '✓ DONE' : '⏳ PENDING'}</td>
+        <td style="padding:10px; border-bottom:1px solid #e2e8f0;">${i+1}</td>
+        <td style="padding:10px; border-bottom:1px solid #e2e8f0;">${escapeHtml(formatDateTime(e.dateTime))}</td>
+        <td style="padding:10px; border-bottom:1px solid #e2e8f0;"><strong>${escapeHtml(e.boss)}</strong></td>
+        <td style="padding:10px; border-bottom:1px solid #e2e8f0;">${escapeHtml(e.work)}</td>
+        <td style="padding:10px; border-bottom:1px solid #e2e8f0; text-align:right;">${formatMoney(e.amount)}</td>
+        <td style="padding:10px; border-bottom:1px solid #e2e8f0;">${escapeHtml(e.note && e.note.trim() !== '' ? e.note : '—')}</td>
+        <td style="padding:10px; border-bottom:1px solid #e2e8f0;"><span style="background:${e.status==='done'?'#10b98120':'#f59e0b20'}; padding:4px 10px; border-radius:20px;">${e.status === 'done' ? '✓ DONE' : '⏳ PENDING'}</span></td>
       </tr>
     `).join("");
     
-    // Group by boss for summary
     let bossMap = new Map();
-    exportItems.forEach(e => {
-      bossMap.set(e.boss, (bossMap.get(e.boss) || 0) + e.amount);
-    });
-    let bossRows = Array.from(bossMap.entries()).map(([name, amt]) => `
-      <tr><td style="padding:8px;"><strong>${escapeHtml(name)}</strong></td><td style="text-align:right; padding:8px;">${formatMoney(amt)}</td></tr>
-    `).join('');
+    exportItems.forEach(e => { bossMap.set(e.boss, (bossMap.get(e.boss) || 0) + e.amount); });
+    let bossRows = Array.from(bossMap.entries()).map(([name, amt]) => `<tr><td style="padding:8px;"><strong>${escapeHtml(name)}</strong></td><td style="text-align:right; padding:8px;">${formatMoney(amt)}</td></tr>`).join('');
     
-    const htmlContent = `<!DOCTYPE html>
+    const reportHtml = `<!DOCTYPE html>
     <html>
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Hisab_Report_${monthName}_${year}</title>
+      <title>Hisab Report - ${monthName} ${year}</title>
       <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 20px; background: #fff; color: #1e293b; }
-        .header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #4f46e5; }
-        h1 { font-size: 24px; color: #4f46e5; margin-bottom: 6px; }
-        .sub { font-size: 12px; color: #64748b; }
-        .summary-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 20px 0; }
-        .card { background: #f8fafc; padding: 12px; border-radius: 16px; text-align: center; border: 1px solid #e2e8f0; }
-        .card-label { font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase; }
-        .card-value { font-size: 18px; font-weight: 800; margin-top: 5px; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; padding: 16px; background: #fff; color: #1e293b; }
+        .header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 3px solid #4f46e5; }
+        h1 { font-size: 22px; color: #4f46e5; margin-bottom: 6px; }
+        .sub { font-size: 11px; color: #64748b; }
+        .summary-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 20px 0; }
+        .summary-card { background: #f8fafc; padding: 12px; border-radius: 16px; text-align: center; border: 1px solid #e2e8f0; }
+        .summary-label { font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase; }
+        .summary-value { font-size: 18px; font-weight: 800; margin-top: 5px; }
         .section-title { font-size: 16px; font-weight: 700; margin: 20px 0 12px; padding-left: 10px; border-left: 3px solid #4f46e5; }
         table { width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 20px; }
-        th { background: #f1f5f9; padding: 10px 8px; text-align: left; font-weight: 700; border-bottom: 1px solid #e2e8f0; }
+        th { background: #f1f5f9; padding: 10px 8px; text-align: left; font-weight: 700; }
         td { padding: 8px; border-bottom: 1px solid #e2e8f0; }
         .text-right { text-align: right; }
+        .print-btn { background: #4f46e5; color: white; border: none; padding: 10px 20px; border-radius: 30px; font-size: 14px; font-weight: 600; margin: 16px 0; cursor: pointer; width: 100%; max-width: 200px; }
+        .print-btn:active { transform: scale(0.97); }
         .footer { text-align: center; font-size: 9px; color: #94a3b8; margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e8f0; }
         @media print {
-          body { padding: 12px; }
+          body { padding: 10px; }
+          .no-print { display: none; }
+          .summary-card { break-inside: avoid; }
+          table { break-inside: avoid; }
         }
       </style>
     </head>
@@ -839,34 +803,40 @@
         <h1>📊 HISAB PRO - EXPENSE REPORT</h1>
         <div class="sub">${monthName} ${year} | Filter: ${escapeHtml(bossFilter)} | Generated: ${new Date().toLocaleString()}</div>
       </div>
-      <div class="summary-cards">
-        <div class="card"><div class="card-label">📋 Total Entries</div><div class="card-value">${exportItems.length}</div></div>
-        <div class="card"><div class="card-label">🏦 Total Expense</div><div class="card-value">${formatMoney(total)}</div></div>
-        <div class="card"><div class="card-label">⏳ Pending</div><div class="card-value">${pending} / ${formatMoney(pendingAmt)}</div></div>
-        <div class="card"><div class="card-label">✔️ Done</div><div class="card-value">${done} / ${formatMoney(doneAmt)}</div></div>
+      
+      <div class="summary-grid">
+        <div class="summary-card"><div class="summary-label">📋 Total Entries</div><div class="summary-value">${exportItems.length}</div></div>
+        <div class="summary-card"><div class="summary-label">🏦 Total Expense</div><div class="summary-value">${formatMoney(total)}</div></div>
+        <div class="summary-card"><div class="summary-label">⏳ Pending</div><div class="summary-value">${pending} / ${formatMoney(pendingAmt)}</div></div>
+        <div class="summary-card"><div class="summary-label">✔️ Done</div><div class="summary-value">${done} / ${formatMoney(doneAmt)}</div></div>
       </div>
+      
       <div class="section-title">👥 Boss-wise Summary</div>
-      <table><thead><tr><th>Boss</th><th class="text-right">Total Amount</th></tr></thead><tbody>${bossRows}</tbody></table>
+      <table><thead><tr><th>Boss</th><th class="text-right">Total Amount</th></tr></thead><tbody>${bossRows}</tbody></table>>
+      
       <div class="section-title">📋 Transaction Details</div>
-      <table><thead><tr><th>#</th><th>Date & Time</th><th>Boss</th><th>Work</th><th class="text-right">Amount</th><th>Note</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table>
+      <table><thead><tr><th>#</th><th>Date & Time</th><th>Boss</th><th>Work</th><th class="text-right">Amount</th><th>Note</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table>>
+      
       <div class="footer"><p>Hisab Pro - Developed by Aditya.S | Official Expense Record</p></div>
+      <div class="no-print" style="text-align:center; margin-top:16px;">
+        <button onclick="window.print();" class="print-btn">🖨️ Save as PDF / Print</button>
+        <p style="font-size:10px; margin-top:8px; color:#64748b;">Click above to save as PDF (Choose "Save as PDF" in printer options)</p>
+      </div>
+      <script>console.log("Report ready - use print to save as PDF");<\/script>
     </body>
     </html>`;
     
-    // Create blob and trigger download (works on all mobile browsers)
-    const blob = new Blob([htmlContent], { type: 'application/pdf' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `Hisab_Report_${monthName}_${year}.pdf`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-    showToast("✅ PDF generated and downloading...", 3000);
+    const win = window.open();
+    if (win) {
+      win.document.write(reportHtml);
+      win.document.close();
+      showToast("📄 Report opened! Click 'Save as PDF' to download");
+    } else {
+      alert("Please allow popups to view the report. You can also use the Backup feature.");
+    }
   }
 
-  function downloadBackup() { let backup = { version: 16, exportedAt: new Date().toISOString(), records: expenses }; let a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" })); a.download = `hisab-backup-${new Date().toISOString().slice(0,10)}.json`; a.click(); URL.revokeObjectURL(a.href); showToast("📦 Backup downloaded", 2000); }
+  function downloadBackup() { let backup = { version: 17, exportedAt: new Date().toISOString(), records: expenses }; let a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" })); a.download = `hisab-backup-${new Date().toISOString().slice(0,10)}.json`; a.click(); URL.revokeObjectURL(a.href); showToast("📦 Backup saved"); }
   async function restoreFromFile(e) { let file = e.target.files[0]; if (!file) return; try { let txt = await file.text(); let p = JSON.parse(txt); let rec = p.records || []; if (Array.isArray(rec) && confirm(`Restore ${rec.length} records?`)) { expenses = rec.filter(r => r.id && r.boss && typeof r.amount === 'number'); saveExpenses(expenses); resetForm(); renderAll(); alert("Restored!"); } } catch(err) { alert("Invalid file"); } backupFile.value = ""; }
 
   function startClock() { function tick() { liveClockSpan.innerHTML = `⏱️ ${new Date().toLocaleString("en-IN", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })}`; } tick(); setInterval(tick, 1000); }
@@ -876,7 +846,7 @@
   filterMonth.addEventListener("change", renderBossSummary);
   filterYear.addEventListener("change", renderBossSummary);
   resetMonthBtn.addEventListener("click", () => { let n = new Date(); filterMonth.value = n.getMonth(); filterYear.value = n.getFullYear(); renderBossSummary(); });
-  exportPdfBtn.addEventListener("click", exportPDF);
+  exportPdfBtn.addEventListener("click", openReport);
   downloadBtn.addEventListener("click", downloadBackup);
   restoreBtn.addEventListener("click", () => backupFile.click());
   backupFile.addEventListener("change", restoreFromFile);
